@@ -2,7 +2,20 @@ sudo: false
 language: clojure
 lein: lein2
 jdk:
-  - oraclejdk8
+- oraclejdk8
 branches:
   except:
-    - gh-pages
+  - gh-pages
+
+before_deploy: lein uberjar
+deploy:
+  provider: releases
+  api_key:
+    secure: wMz6UvmfaqmhUiMd20kGxeFuh93mIxV3psTXcC2zLd5BzQAjpLrhF3HF3XiRk4LMhl76nTaSTWjiHo0mYJ3fxv4bi1bhiY//U+rBdjHCoCp3dZDWT+iOVPMe7PBS3jtWKTWiLUw/8izfWHjkESC0KQzBXDFfGQBSR6adc09K9Ht29e/Xyuvd3sedC2lwLyet8bV0Sa7qsvsQdvqX7b9mcu2LdIWt5N4rFDQoFcdA0hHpmyAA4vMI7pmMMUxO21PXspMAe2NuncAkrG1U1JmOd91+NPGFGo5WFFFcJXx0O5CSvpc4Nog/0jWqdYi7KTQtgLcUyEkVZkz0lfbs8CSlnYMA/AH4WiB5Ns8OwQccu6pnFAhAnZU1tgr+QgTgc9GM3OHY4XVE1G+stHH+nH9n6QxZacfZL4n8qi5MtIy6gHFrEH43QltmIjUCKzP99Mhv1BYLLoLQtRQVmEiJseaKdMn3kjfHvOvRQxw7/NvOu5Ej5IAhLjQU9si8DXaQOqH6sff298MPKNMysNBoqKWIcqpwyHkqYb6h/n6Cqg4moLpyfdRWHsmSAclSUhNpquMPlZvQ4fcMoRM1N2TtraUe0mNWqELf8Jw6wyel2FFqYBSAJHMcvlONi0dGgwa44BKfAu2snEfnfgpa4Fa/YZuMUVePHeoRuF2KBgsSdRANZ28=
+  file: target/pithos*.jar
+  file_glob: true
+  skip_cleanup: true
+  on:
+    repo: criteo-forks/pithos
+    branch: criteo
+    tags: true
